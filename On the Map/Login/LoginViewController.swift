@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
         let signUpAddress = "https://www.udacity.com/account/auth#!/signup"
         
         let signUpDescription = NSAttributedString(string: "Don't have an account? ")
-        let signUpLink = NSAttributedString(string: "Sign Up", attributes:[NSAttributedStringKey.link: URL(string: signUpAddress)!])
+        let signUpLink = NSAttributedString(string: "Sign Up", attributes:[NSAttributedString.Key.link: URL(string: signUpAddress)!])
         
         let attributedText = NSMutableAttributedString()
         attributedText.append(signUpDescription)
@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
         container.backgroundColor = UIColor.init(white: 0.0, alpha: 0.3)
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
-        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.style = .whiteLarge
         activityIndicator.center = view.center
         
         activityIndicator.hidesWhenStopped = true
@@ -158,7 +158,7 @@ extension LoginViewController {
                 return
             }
             
-            let range = Range(5..<data.count)
+            let range = 5..<data.count
             let validData = data.subdata(in: range)
             
             let unexpectedErrorMessage = NSLocalizedString("Request failed with an unexpected error", comment: "")
