@@ -14,14 +14,20 @@ extension UdacityClient {
         
         // MARK: URLs
         static let ApiScheme = "https"
-        static let ApiHost = "www.udacity.com"
-        static let ApiPath = "/api"
+        static let ApiHost = "onthemap-api.udacity.com"
+        static let ApiPath = "v1"
     }
     
     // MARK: Methods
     struct Methods {
         
         // MARK: Authentication
-        static let AuthenticationSession = "/session"
+        static let Session = "session"
+    }
+    
+    // MARK: Parameter Keys
+    struct ParameterKeys {
+        static let Username = "username"
+        static let Password = "password"
     }
 }

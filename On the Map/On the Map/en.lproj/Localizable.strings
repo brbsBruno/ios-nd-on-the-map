@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  On the Map
+
+  Created by Bruno Barbosa on 12/10/18.
+  Copyright © 2018 Bruno Barbosa. All rights reserved.
+*/
+
+
+/// LoginViewController
+"Request failed with error" = "Request failed with error";
+"Request failed without response data" = "Request failed without response data";
+"Request failed with an unexpected error" = "Request failed with an unexpected error";
