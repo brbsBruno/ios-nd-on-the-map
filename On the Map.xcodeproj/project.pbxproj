@@ -16,8 +16,11 @@
 		7F770EB8207AAA6A00E792A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F770EB7207AAA6A00E792A2 /* Assets.xcassets */; };
 		7F770EBB207AAA6A00E792A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F770EB9207AAA6A00E792A2 /* LaunchScreen.storyboard */; };
 		7F770EC6207AAA6A00E792A2 /* On_the_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F770EC5207AAA6A00E792A2 /* On_the_MapTests.swift */; };
+		7F8FDC4622024BC200732715 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FDC4522024BC200732715 /* TableViewController.swift */; };
+		7F8FDC4822024C6B00732715 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FDC4722024C6B00732715 /* MapViewController.swift */; };
 		7FB86B2120FB884800633AD5 /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB86B2020FB884800633AD5 /* UdacityConstants.swift */; };
 		7FD7BD8820C4B04B00D8F7E7 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD7BD8720C4B04B00D8F7E7 /* UdacityClient.swift */; };
+		7FE441D221F4F34900AE4497 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE441D121F4F34900AE4497 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +47,11 @@
 		7F770EC1207AAA6A00E792A2 /* On the MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On the MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F770EC5207AAA6A00E792A2 /* On_the_MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = On_the_MapTests.swift; sourceTree = "<group>"; };
 		7F770EC7207AAA6A00E792A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F8FDC4522024BC200732715 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		7F8FDC4722024C6B00732715 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7FB86B2020FB884800633AD5 /* UdacityConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		7FD7BD8720C4B04B00D8F7E7 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		7FE441D121F4F34900AE4497 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,12 +72,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7F35AC0620BAF6FD00615A5B /* Login */ = {
+		7F6F341921EFEE5300880A2A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				7F770EB2207AAA6900E792A2 /* LoginViewController.swift */,
+				7F232E922170FCEE008C55AB /* Localizable.strings */,
+				7F770EB9207AAA6A00E792A2 /* LaunchScreen.storyboard */,
+				7F770EB7207AAA6A00E792A2 /* Assets.xcassets */,
+				7F770EB4207AAA6900E792A2 /* Main.storyboard */,
 			);
-			path = Login;
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		7F6F341A21EFEE8B00880A2A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7F770EBC207AAA6A00E792A2 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7F6F341B21EFEEAD00880A2A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7FE441D121F4F34900AE4497 /* TabBarController.swift */,
+				7F770EB2207AAA6900E792A2 /* LoginViewController.swift */,
+				7F8FDC4522024BC200732715 /* TableViewController.swift */,
+				7F8FDC4722024C6B00732715 /* MapViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		7F770EA4207AAA6900E792A2 = {
@@ -96,13 +124,10 @@
 			isa = PBXGroup;
 			children = (
 				7FD7BD8520C4B00200D8F7E7 /* Model */,
-				7F35AC0620BAF6FD00615A5B /* Login */,
+				7F6F341B21EFEEAD00880A2A /* Controller */,
+				7F6F341921EFEE5300880A2A /* Assets */,
+				7F6F341A21EFEE8B00880A2A /* Supporting Files */,
 				7F770EB0207AAA6900E792A2 /* AppDelegate.swift */,
-				7F770EB4207AAA6900E792A2 /* Main.storyboard */,
-				7F770EB7207AAA6A00E792A2 /* Assets.xcassets */,
-				7F770EB9207AAA6A00E792A2 /* LaunchScreen.storyboard */,
-				7F232E922170FCEE008C55AB /* Localizable.strings */,
-				7F770EBC207AAA6A00E792A2 /* Info.plist */,
 			);
 			path = "On the Map";
 			sourceTree = "<group>";
@@ -245,8 +270,11 @@
 				7F770EB3207AAA6900E792A2 /* LoginViewController.swift in Sources */,
 				7F770EB1207AAA6900E792A2 /* AppDelegate.swift in Sources */,
 				7F6616E521036EA5004B7A1A /* UdacityConvenience.swift in Sources */,
+				7F8FDC4622024BC200732715 /* TableViewController.swift in Sources */,
+				7F8FDC4822024C6B00732715 /* MapViewController.swift in Sources */,
 				7FD7BD8820C4B04B00D8F7E7 /* UdacityClient.swift in Sources */,
 				7F6090CC211F187900A432B1 /* UdacitySession.swift in Sources */,
+				7FE441D221F4F34900AE4497 /* TabBarController.swift in Sources */,
 				7FB86B2120FB884800633AD5 /* UdacityConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,7 +445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R87TE9688S;
-				INFOPLIST_FILE = "On the Map/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/On the Map/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -435,7 +463,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R87TE9688S;
-				INFOPLIST_FILE = "On the Map/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/On the Map/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

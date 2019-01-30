@@ -25,14 +25,20 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailField.delegate = self
-        passwordField.delegate = self
-        
+        setupTextFields()
         setupSignUpTextView()
         setupActivityIndicator()
     }
     
     // MARK: Setup
+    
+    private func setupTextFields() {
+        emailField.delegate = self
+        passwordField.delegate = self
+        
+        emailField.text = ""
+        passwordField.text = ""
+    }
     
     private func setupSignUpTextView() {
         let signUpAddress = "https://www.udacity.com/account/auth#!/signup"
@@ -206,6 +212,11 @@ extension LoginViewController {
             let encodedUserSession: Data = NSKeyedArchiver.archivedData(withRootObject: udacitySession)
             userDefaults.setValue(encodedUserSession, forKeyPath: "userSession")
             userDefaults.synchronize()
+            
+            let controller = self.storyboard!.instantiateViewController(withIdentifier: "MainNavigationController") as! UINavigationController
+            self.present(controller, animated: true, completion: {
+                self.setupTextFields()
+            })
         }
     }
 }
