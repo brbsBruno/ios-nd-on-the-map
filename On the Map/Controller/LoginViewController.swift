@@ -43,11 +43,12 @@ class LoginViewController: UIViewController {
     private func setupSignUpTextView() {
         let signUpAddress = "https://www.udacity.com/account/auth#!/signup"
         
-        let signUpDescription = NSAttributedString(string: "Don't have an account? ")
-        let signUpLink = NSAttributedString(string: "Sign Up", attributes:[NSAttributedString.Key.link: URL(string: signUpAddress)!])
+        let signUpDescription = NSAttributedString(string: NSLocalizedString("Don't have an account?", comment: ""))
+        let signUpLink = NSAttributedString(string: NSLocalizedString("Sign Up", comment: ""), attributes:[NSAttributedString.Key.link: URL(string: signUpAddress)!])
         
         let attributedText = NSMutableAttributedString()
         attributedText.append(signUpDescription)
+        attributedText.append(NSAttributedString(string: " "))
         attributedText.append(signUpLink)
         
         signUpTextView.attributedText = attributedText
@@ -85,7 +86,7 @@ class LoginViewController: UIViewController {
         loginButton.alpha = 1
     }
     
-    // MARK: - Acitivity Indicator
+    // MARK: Acitivity Indicator
     
     func startIndicatingActivity() {
         view.addSubview(self.container)
@@ -104,9 +105,9 @@ class LoginViewController: UIViewController {
     }
     
     private func displayLoginError(_ error: String) {
-        let loginErrorTitle = "Login Error"
+        let loginErrorTitle = NSLocalizedString("Login Error", comment: "")
         let alertViewController = UIAlertController(title: loginErrorTitle, message: error, preferredStyle: .alert)
-        alertViewController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        alertViewController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
         
         present(alertViewController, animated: true, completion: nil);
     }
@@ -114,7 +115,8 @@ class LoginViewController: UIViewController {
     private func login() {
         if let userEmail = emailField.text, let userPassword = passwordField.text {
             guard !userEmail.isEmpty && !userPassword.isEmpty else {
-                displayLoginError("The Email or the Password cannot be empty.")
+                let error = NSLocalizedString("The Email or the Password cannot be empty", comment: "")
+                displayLoginError(error)
                 return
             }
             
