@@ -26,10 +26,14 @@ class TableViewController: UIViewController {
         }
     }
     
+    var loadingView: LoadingView!
+    
     //MARK: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingView = LoadingView(for: view)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -42,15 +46,6 @@ class TableViewController: UIViewController {
     func setupDataSource() {
         let tabController = tabBarController as! TabBarController
         theData = tabController.theData
-    }
-    
-    // MARK: Utils
-    
-    private func displayError(_ error: String) {
-        let alertViewController = UIAlertController(title: nil, message: error, preferredStyle: .alert)
-        alertViewController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
-        
-        present(alertViewController, animated: true, completion: nil);
     }
 }
 
@@ -87,11 +82,10 @@ extension TableViewController: UITableViewDataSource {
             UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
             
         } else {
-            displayError(NSLocalizedString("Invalid URL", comment: ""))
+            let error = NSLocalizedString("Invalid URL", comment: "")
+            displayFailureAlert(title: nil, error: error)
         }
-        
     }
-    
 }
 
 extension TableViewController: StudentInformationPresenter {

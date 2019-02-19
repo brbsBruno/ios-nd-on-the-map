@@ -23,11 +23,15 @@ class MapViewController: UIViewController {
         }
     }
     
+    var loadingView: LoadingView!
+    
     //MARK: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        loadingView = LoadingView(for: view)
+        
         mapView.delegate = self
         
         setupDataSource()
@@ -59,29 +63,12 @@ class MapViewController: UIViewController {
     
     //MARK: Helpers
     
-    func center(mapView: MKMapView, location: CLLocation, radius: CLLocationDistance) {
-        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
-                                                  latitudinalMeters: radius,
-                                                  longitudinalMeters: radius)
-        
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
-    
     func reloadAnnotations() {
         if (mapView.annotations.count > 0) {
             mapView.removeAnnotations(mapView.annotations)
         }
         
         setupAnnotations()
-    }
-    
-    // MARK: Utils
-    
-    private func displayError(_ error: String) {
-        let alertViewController = UIAlertController(title: nil, message: error, preferredStyle: .alert)
-        alertViewController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
-        
-        present(alertViewController, animated: true, completion: nil);
     }
 }
 
@@ -113,7 +100,12 @@ extension MapViewController: MKMapViewDelegate {
             UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
             
         } else {
-            displayError(NSLocalizedString("Invalid URL", comment: ""))
+            let error = NSLocalizedString("Invalid URL", comment: "")
+            displayFailureAlert(title: nil, error: error)
         }
     }
+}
+
+extension MapViewController: StudentInformationPresenter {
+    
 }

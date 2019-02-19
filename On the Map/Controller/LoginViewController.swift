@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, LoadableView, FailableView {
     
     // MARK: Properties
     
@@ -17,17 +17,17 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signUpTextView: UITextView!
     @IBOutlet weak var loginButton: UIButton!
     
-    var container: UIView!
-    var activityIndicator: UIActivityIndicatorView!
+    var loadingView: LoadingView!
     
     // MARK: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadingView = LoadingView(for: view)
+        
         setupTextFields()
         setupSignUpTextView()
-        setupActivityIndicator()
     }
     
     // MARK: Setup
@@ -56,46 +56,19 @@ class LoginViewController: UIViewController {
         signUpTextView.font = UIFont.preferredFont(forTextStyle: .body)
     }
     
-    private func setupActivityIndicator() {
-        container = UIView()
-        container.frame = view.frame
-        container.center = view.center
-        container.backgroundColor = UIColor.init(white: 0.0, alpha: 0.3)
-        
-        activityIndicator = UIActivityIndicatorView(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
-        activityIndicator.style = .whiteLarge
-        activityIndicator.center = view.center
-        
-        activityIndicator.hidesWhenStopped = true
-        
-        container.addSubview(activityIndicator)
-    }
-    
     private func setupBeginLoginUI() {
         view.endEditing(true)
         loginButton.isEnabled = false
         loginButton.alpha = 0.5
         
-        startIndicatingActivity()
+        showLoadingView()
     }
     
     private func setupEndLoginUI() {
-        stopIndicatingActivity()
+        dismissLoadingView()
         
         loginButton.isEnabled = true
         loginButton.alpha = 1
-    }
-    
-    // MARK: Acitivity Indicator
-    
-    func startIndicatingActivity() {
-        view.addSubview(self.container)
-        activityIndicator.startAnimating()
-    }
-    
-    func stopIndicatingActivity() {
-        activityIndicator.stopAnimating()
-        container.removeFromSuperview()
     }
     
     // MARK: Actions
@@ -104,19 +77,13 @@ class LoginViewController: UIViewController {
         login()
     }
     
-    private func displayLoginError(_ error: String) {
-        let loginErrorTitle = NSLocalizedString("Login Error", comment: "")
-        let alertViewController = UIAlertController(title: loginErrorTitle, message: error, preferredStyle: .alert)
-        alertViewController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
-        
-        present(alertViewController, animated: true, completion: nil);
-    }
-    
     private func login() {
         if let userEmail = emailField.text, let userPassword = passwordField.text {
             guard !userEmail.isEmpty && !userPassword.isEmpty else {
+                let title = NSLocalizedString("Login Error", comment: "")
                 let error = NSLocalizedString("The Email or the Password cannot be empty", comment: "")
-                displayLoginError(error)
+                displayFailureAlert(title: title, error: error)
+                
                 return
             }
             
@@ -201,14 +168,13 @@ extension LoginViewController {
         DispatchQueue.main.async {
             self.setupEndLoginUI()
             
-            self.displayLoginError(message)
+            let title = NSLocalizedString("Login Error", comment: "")
+            self.displayFailureAlert(title: title, error: message)
         }
     }
     
     func loginSucceed(withSessionResponde userSession: UdacitySessionResponse) {
         DispatchQueue.main.async {
-            self.setupEndLoginUI()
-            
             let userDefaults = UserDefaults.standard
             let udacitySession = UdacitySession.init(sessionRespose: userSession)
             let encodedUserSession: Data = NSKeyedArchiver.archivedData(withRootObject: udacitySession)
@@ -217,6 +183,7 @@ extension LoginViewController {
             
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "MainNavigationController") as! UINavigationController
             self.present(controller, animated: true, completion: {
+                self.setupEndLoginUI()
                 self.setupTextFields()
             })
         }

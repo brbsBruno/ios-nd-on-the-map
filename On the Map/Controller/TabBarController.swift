@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol StudentInformationPresenter {
+protocol StudentInformationPresenter: LoadableView, FailableView {
     // func reloadData()
 }
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, FailableView {
     
     // TODO: rename
     var theData: [StudentInformation]?
@@ -42,7 +42,9 @@ class TabBarController: UITabBarController {
     func setupTableViewData() {
         let tableViewController = viewControllers?.last as! TableViewController
         tableViewController.theData = theData
-        //tableViewController.tableView.reloadData()
+        if (tableViewController.isViewLoaded) {
+            tableViewController.tableView.reloadData()
+        }
     }
     
     //MARK: Actions
@@ -66,6 +68,8 @@ class TabBarController: UITabBarController {
     // MARK: Networking
         
     func getStudentsLocation() {
+        selectedStudentViewController.showLoadingView()
+        
         let parseClient = ParseClient.shared()
         let request = parseClient.getStudentLocation()
         
@@ -73,19 +77,19 @@ class TabBarController: UITabBarController {
             
             guard error == nil else {
                 let errorMessage = NSLocalizedString("Request failed with error", comment: "")
-                self.displayError(errorMessage)
+                self.displayFailureAlert(title: nil, error: errorMessage)
                 return
             }
             
             guard let data = data else {
                 let errorMessage = NSLocalizedString("Request failed without response data", comment: "")
-                self.displayError(errorMessage)
+                self.displayFailureAlert(title: nil, error: errorMessage)
                 return
             }
             
             let errorMessage = NSLocalizedString("Request failed with an unexpected error", comment: "")
             guard let response = response as? HTTPURLResponse, 200 ... 299 ~= response.statusCode else {
-                self.displayError(errorMessage)
+                self.displayFailureAlert(title: nil, error: errorMessage)
                 return
             }
             
@@ -105,18 +109,10 @@ class TabBarController: UITabBarController {
             DispatchQueue.main.async {
                 self.setupMapViewData()
                 self.setupTableViewData()
+                self.selectedStudentViewController.dismissLoadingView()
             }
         }
         
         task.resume()
-    }
-    
-    // MARK: Utils
-    
-    private func displayError(_ error: String) {
-        let alertViewController = UIAlertController(title: nil, message: error, preferredStyle: .alert)
-        alertViewController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
-        
-        present(alertViewController, animated: true, completion: nil);
     }
 }
