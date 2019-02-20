@@ -77,19 +77,19 @@ class TabBarController: UITabBarController, FailableView {
             
             guard error == nil else {
                 let errorMessage = NSLocalizedString("Request failed with error", comment: "")
-                self.displayFailureAlert(title: nil, error: errorMessage)
+                self.getStudentsLocationFailed(withErrorMessage: errorMessage)
                 return
             }
             
             guard let data = data else {
                 let errorMessage = NSLocalizedString("Request failed without response data", comment: "")
-                self.displayFailureAlert(title: nil, error: errorMessage)
+                self.getStudentsLocationFailed(withErrorMessage: errorMessage)
                 return
             }
             
             let errorMessage = NSLocalizedString("Request failed with an unexpected error", comment: "")
             guard let response = response as? HTTPURLResponse, 200 ... 299 ~= response.statusCode else {
-                self.displayFailureAlert(title: nil, error: errorMessage)
+                self.getStudentsLocationFailed(withErrorMessage: errorMessage)
                 return
             }
             
@@ -104,7 +104,15 @@ class TabBarController: UITabBarController, FailableView {
             decoder.dateDecodingStrategy = .formatted(formatter)
             
             let studentInformationResults = try? decoder.decode(StudentInformationResults.self, from: data)
-            self.theData = studentInformationResults?.results
+            self.getStudentsLocationSucceed(withStudentsInformation: studentInformationResults?.results)
+        }
+        
+        task.resume()
+    }
+    
+    func getStudentsLocationSucceed(withStudentsInformation studentInformation: [StudentInformation]?) {
+        DispatchQueue.main.async {
+            self.theData = studentInformation
             
             DispatchQueue.main.async {
                 self.setupMapViewData()
@@ -112,7 +120,12 @@ class TabBarController: UITabBarController, FailableView {
                 self.selectedStudentViewController.dismissLoadingView()
             }
         }
-        
-        task.resume()
+    }
+    
+    func getStudentsLocationFailed(withErrorMessage message: String) {
+        DispatchQueue.main.async {
+            self.selectedStudentViewController.dismissLoadingView()
+            self.displayFailureAlert(title: nil, error: message)
+        }
     }
 }
