@@ -10,6 +10,7 @@
 		7F088358221A1B2500C1231A /* LoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F088357221A1B2500C1231A /* LoadableView.swift */; };
 		7F08835A221A200300C1231A /* FailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F088359221A200300C1231A /* FailableView.swift */; };
 		7F232E942170FCEE008C55AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F232E922170FCEE008C55AB /* Localizable.strings */; };
+		7F23C12E221F443300CB8A06 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23C12D221F443300CB8A06 /* AddLocationViewController.swift */; };
 		7F2495C42203BEBD00617668 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2495C32203BEBD00617668 /* StudentInformation.swift */; };
 		7F2495C62203C13C00617668 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2495C52203C13C00617668 /* ParseClient.swift */; };
 		7F6090CC211F187900A432B1 /* UdacitySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6090CB211F187900A432B1 /* UdacitySession.swift */; };
@@ -41,6 +42,7 @@
 		7F088357221A1B2500C1231A /* LoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableView.swift; sourceTree = "<group>"; };
 		7F088359221A200300C1231A /* FailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableView.swift; sourceTree = "<group>"; };
 		7F232E932170FCEE008C55AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "On the Map/Base.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7F23C12D221F443300CB8A06 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		7F2495C32203BEBD00617668 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		7F2495C52203C13C00617668 /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		7F6090CB211F187900A432B1 /* UdacitySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacitySession.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				7F8FDC4522024BC200732715 /* TableViewController.swift */,
 				7F088357221A1B2500C1231A /* LoadableView.swift */,
 				7F088359221A200300C1231A /* FailableView.swift */,
+				7F23C12D221F443300CB8A06 /* AddLocationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				7F088358221A1B2500C1231A /* LoadableView.swift in Sources */,
 				7F770EB3207AAA6900E792A2 /* LoginViewController.swift in Sources */,
 				7F770EB1207AAA6900E792A2 /* AppDelegate.swift in Sources */,
+				7F23C12E221F443300CB8A06 /* AddLocationViewController.swift in Sources */,
 				7F08835A221A200300C1231A /* FailableView.swift in Sources */,
 				7F6616E521036EA5004B7A1A /* UdacityConvenience.swift in Sources */,
 				7F8FDC4622024BC200732715 /* TableViewController.swift in Sources */,

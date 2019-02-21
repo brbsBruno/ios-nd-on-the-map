@@ -16,3 +16,8 @@
 "Don't have an account?" = "Don't have an account?";
 "Sign Up" = "Sign Up";
 "Ok" = "Ok";
+
+"Add Location Error" = "Add Location Error";
+"Location cannot be empty" = "Location cannot be empty";
+"Website cannot be empty" = "Website cannot be empty";
+"Website URL is invalid" = "Website URL is invalid";
