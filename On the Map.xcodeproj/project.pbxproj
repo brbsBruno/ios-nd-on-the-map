@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7F088358221A1B2500C1231A /* LoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F088357221A1B2500C1231A /* LoadableView.swift */; };
 		7F08835A221A200300C1231A /* FailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F088359221A200300C1231A /* FailableView.swift */; };
+		7F15FB1C221F6F02006BE3BC /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F15FB1B221F6F02006BE3BC /* LocationDetailsViewController.swift */; };
 		7F232E942170FCEE008C55AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F232E922170FCEE008C55AB /* Localizable.strings */; };
 		7F23C12E221F443300CB8A06 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23C12D221F443300CB8A06 /* AddLocationViewController.swift */; };
 		7F2495C42203BEBD00617668 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2495C32203BEBD00617668 /* StudentInformation.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		7F088357221A1B2500C1231A /* LoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableView.swift; sourceTree = "<group>"; };
 		7F088359221A200300C1231A /* FailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableView.swift; sourceTree = "<group>"; };
+		7F15FB1B221F6F02006BE3BC /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
 		7F232E932170FCEE008C55AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "On the Map/Base.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7F23C12D221F443300CB8A06 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		7F2495C32203BEBD00617668 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				7F088357221A1B2500C1231A /* LoadableView.swift */,
 				7F088359221A200300C1231A /* FailableView.swift */,
 				7F23C12D221F443300CB8A06 /* AddLocationViewController.swift */,
+				7F15FB1B221F6F02006BE3BC /* LocationDetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				7F8FDC4622024BC200732715 /* TableViewController.swift in Sources */,
 				7F8FDC4822024C6B00732715 /* MapViewController.swift in Sources */,
 				7FD7BD8820C4B04B00D8F7E7 /* UdacityClient.swift in Sources */,
+				7F15FB1C221F6F02006BE3BC /* LocationDetailsViewController.swift in Sources */,
 				7F6090CC211F187900A432B1 /* UdacitySession.swift in Sources */,
 				7FE441D221F4F34900AE4497 /* TabBarController.swift in Sources */,
 				7F2495C42203BEBD00617668 /* StudentInformation.swift in Sources */,
