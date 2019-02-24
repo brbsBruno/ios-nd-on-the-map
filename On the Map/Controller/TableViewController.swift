@@ -18,7 +18,10 @@ class TableViewController: UIViewController {
         didSet {
             if (isViewLoaded) {
                 if (theData != nil) {
-                    theData!.sort { $0.updatedAt > $1.updatedAt }
+                    theData!.sort {
+                        guard let updatedAt0 = $0.updatedAt, let updatedAt1 = $1.updatedAt else { return false }
+                        return updatedAt0 > updatedAt1
+                    }
                 }
                 
                 tableView.reloadData()
@@ -37,16 +40,8 @@ class TableViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        
-        setupDataSource()
     }
-    
-    //MARK: Setup
-    
-    func setupDataSource() {
-        let tabController = tabBarController as! TabBarController
-        theData = tabController.theData
-    }
+
 }
 
 extension TableViewController: UITableViewDelegate {

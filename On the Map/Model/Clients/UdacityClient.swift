@@ -14,10 +14,9 @@ class UdacityClient: NSObject {
     
     var session  = URLSession.shared
     
-    // authentication state
-    var requestToken: String? = nil
-    var sessionID: String? = nil
-    var userID: Int? = nil
+    // state
+    var udacityUser: UdacityUser?
+    var udacitySession: UdacitySession?
     
     // MARK: Shared Instance
     

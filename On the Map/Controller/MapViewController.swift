@@ -34,16 +34,10 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         
-        setupDataSource()
         setupAnnotations()
     }
     
     //MARK: Setup
-    
-    func setupDataSource() {
-        let tabController = tabBarController as! TabBarController
-        theData = tabController.theData
-    }
     
     func setupAnnotations() {
         if let studentInformations = theData {

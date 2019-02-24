@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.47"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -188,8 +188,7 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="icon_addpin" id="Ief-sm-1cZ">
                                 <connections>
-                                    <action selector="add:" destination="vpO-XQ-6gu" id="BhZ-5k-kax"/>
-                                    <segue destination="X6C-et-StH" kind="presentation" id="DGt-V0-FCL"/>
+                                    <segue destination="X6C-et-StH" kind="presentation" identifier="addLocation" id="DGt-V0-FCL"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="icon_refresh" id="3hO-TL-dd5">

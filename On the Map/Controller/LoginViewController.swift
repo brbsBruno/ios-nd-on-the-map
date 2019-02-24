@@ -117,51 +117,22 @@ extension LoginViewController {
     func getUdacitySession(username: String, password: String) {
         setupBeginLoginUI()
         
-        let udacityClient = UdacityClient.shared()
-        let request = udacityClient.getSession(username: username, password: password)
-        
-        let task = udacityClient.session.dataTask(with: request) { (data, response, error) in
-            guard error == nil else {
-                let errorPrefix = NSLocalizedString("Request failed with error", comment: "")
-                self.loginFailed(withErrorMessage: errorPrefix)
-                return
-            }
+        UdacityClient.shared().getSession(username: username, password: password) { (session, error) in
             
-            guard let data = data, data.count > 6 else {
-                let errorPrefix = NSLocalizedString("Request failed without response data", comment: "")
-                self.loginFailed(withErrorMessage: errorPrefix)
-                return
-            }
-            
-            let range = 5..<data.count
-            let validData = data.subdata(in: range)
-            
-            let unexpectedErrorMessage = NSLocalizedString("Request failed with an unexpected error", comment: "")
-            
-            guard let response = response as? HTTPURLResponse, 200 ... 299 ~= response.statusCode else {
-                do {
-                    let responseError = try JSONDecoder().decode(UdacitySessionResponseError.self, from: validData)
-                    self.loginFailed(withErrorMessage: responseError.error)
-                    
-                } catch {
-                    print(error)
-                    self.loginFailed(withErrorMessage: unexpectedErrorMessage)
-                }
+            if let session = session {
+                UdacityClient.shared().getUser(uniqueKey: session.account.key, completionHandler: { (user, error) in
+                    if let _ = user {
+                        self.loginSucceed()
+                        
+                    } else {
+                        self.loginFailed(withErrorMessage: error!.localizedDescription)
+                    }
+                })
                 
-                return
-            }
-            
-            do {
-                let userSession = try JSONDecoder().decode(UdacitySessionResponse.self, from: validData)
-                self.loginSucceed(withSessionResponde: userSession)
-                
-            } catch {
-                print(error)
-                self.loginFailed(withErrorMessage: unexpectedErrorMessage)
+            } else {
+                self.loginFailed(withErrorMessage: error!.localizedDescription)
             }
         }
-        
-        task.resume()
     }
     
     func loginFailed(withErrorMessage message: String) {
@@ -173,14 +144,8 @@ extension LoginViewController {
         }
     }
     
-    func loginSucceed(withSessionResponde userSession: UdacitySessionResponse) {
+    func loginSucceed() {
         DispatchQueue.main.async {
-            let userDefaults = UserDefaults.standard
-            let udacitySession = UdacitySession.init(sessionRespose: userSession)
-            let encodedUserSession: Data = NSKeyedArchiver.archivedData(withRootObject: udacitySession)
-            userDefaults.setValue(encodedUserSession, forKeyPath: "userSession")
-            userDefaults.synchronize()
-            
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "MainNavigationController") as! UINavigationController
             self.present(controller, animated: true, completion: {
                 self.setupEndLoginUI()

@@ -9,6 +9,7 @@
 import Foundation
 
 extension UdacityClient {
+    
     // MARK: Constants
     struct Constants {
         
@@ -19,13 +20,20 @@ extension UdacityClient {
     }
     
     // MARK: Methods
+    
     struct Methods {
-        
-        // MARK: Authentication
         static let Session = "session"
+        static let Users = "users"
+        static let UsersID = "users/{id}"
+    }
+    
+    // MARK: URL Keys
+    struct URLKeys {
+        static let UserID = "id"
     }
     
     // MARK: Parameter Keys
+    
     struct ParameterKeys {
         static let Username = "username"
         static let Password = "password"

@@ -9,23 +9,30 @@
 import UIKit
 import MapKit
 
-class LocationDetailsViewController: UIViewController {
+class LocationDetailsViewController: UIViewController, LoadableView, FailableView {
     
     // Properties
     
     @IBOutlet weak var mapView: MKMapView!
     
-    var placemark: CLPlacemark?
+    var studentInformation: StudentInformation!
+    
+    var loadingView: LoadingView!
     
     // UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingView = LoadingView(for: view)
 
-        if let placemark = placemark,
-            let coordinate = placemark.location?.coordinate {
+        if let studentInformation = studentInformation,
+            let latitude = studentInformation.latitude,
+            let longitude = studentInformation.longitude,
+            let mapString = studentInformation.mapString {
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             
-            addMapAnnotation(title: placemark.name ?? "User's Location", coordinate: coordinate)
+            addMapAnnotation(title: mapString, coordinate: coordinate)
             centerMapOnCoordinate(coordinate: coordinate)
         }
     }
@@ -50,7 +57,22 @@ class LocationDetailsViewController: UIViewController {
     // Actions
     
     @IBAction func finish(_ sender: Any) {
-        self.parent?.dismiss(animated: true, completion: nil)
+        showLoadingView()
+        
+        ParseClient.shared().postStudentLocation(studentLocation: studentInformation) { (success, error) in
+            
+            DispatchQueue.main.async {
+                self.dismissLoadingView()
+                
+                if let error = error {
+                    self.displayFailureAlert(title: nil, error: error.localizedDescription)
+                    
+                    
+                } else if success == true {
+                    self.parent?.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
     }
     
 }

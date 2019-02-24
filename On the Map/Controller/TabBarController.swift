@@ -9,13 +9,10 @@
 import UIKit
 
 protocol StudentInformationPresenter: LoadableView, FailableView {
-    // func reloadData()
+
 }
 
 class TabBarController: UITabBarController, FailableView {
-    
-    // TODO: rename
-    var theData: [StudentInformation]?
     
     var studentsViewControllers: [StudentInformationPresenter] {
         return self.viewControllers as! [StudentInformationPresenter]
@@ -34,14 +31,14 @@ class TabBarController: UITabBarController, FailableView {
     
     //MARK: Setup
     
-    func setupMapViewData() {
+    func setupMapViewData(with data: [StudentInformation]?) {
         let mapViewController = viewControllers?.first as! MapViewController
-        mapViewController.theData = theData
+        mapViewController.theData = data
     }
     
-    func setupTableViewData() {
+    func setupTableViewData(with data: [StudentInformation]?) {
         let tableViewController = viewControllers?.last as! TableViewController
-        tableViewController.theData = theData
+        tableViewController.theData = data
         if (tableViewController.isViewLoaded) {
             tableViewController.tableView.reloadData()
         }
@@ -60,72 +57,25 @@ class TabBarController: UITabBarController, FailableView {
     @IBAction func refresh(_ sender: UIBarButtonItem) {
         getStudentsLocation()
     }
-    
-    @IBAction func add(_ sender: UIBarButtonItem) {
-        print("add button pressed")
-    }
-    
+
     // MARK: Networking
         
     func getStudentsLocation() {
         selectedStudentViewController.showLoadingView()
         
-        let parseClient = ParseClient.shared()
-        let request = parseClient.getStudentLocation()
-        
-        let task = parseClient.session.dataTask(with: request) { (data, response, error) in
-            
-            guard error == nil else {
-                let errorMessage = NSLocalizedString("Request failed with error", comment: "")
-                self.getStudentsLocationFailed(withErrorMessage: errorMessage)
-                return
-            }
-            
-            guard let data = data else {
-                let errorMessage = NSLocalizedString("Request failed without response data", comment: "")
-                self.getStudentsLocationFailed(withErrorMessage: errorMessage)
-                return
-            }
-            
-            let errorMessage = NSLocalizedString("Request failed with an unexpected error", comment: "")
-            guard let response = response as? HTTPURLResponse, 200 ... 299 ~= response.statusCode else {
-                self.getStudentsLocationFailed(withErrorMessage: errorMessage)
-                return
-            }
-            
-            let decoder = JSONDecoder()
-            
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            formatter.calendar = Calendar(identifier: .iso8601)
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            
-            decoder.dateDecodingStrategy = .formatted(formatter)
-            
-            let studentInformationResults = try? decoder.decode(StudentInformationResults.self, from: data)
-            self.getStudentsLocationSucceed(withStudentsInformation: studentInformationResults?.results)
-        }
-        
-        task.resume()
-    }
-    
-    func getStudentsLocationSucceed(withStudentsInformation studentInformation: [StudentInformation]?) {
-        DispatchQueue.main.async {
-            self.theData = studentInformation
+        ParseClient.shared().getStudentLocation { (studentInformation, error) in
             
             DispatchQueue.main.async {
-                self.setupMapViewData()
-                self.setupTableViewData()
                 self.selectedStudentViewController.dismissLoadingView()
+                
+                if let error = error {
+                    self.displayFailureAlert(title: nil, error: error.localizedDescription)
+                    
+                } else {
+                    self.setupMapViewData(with: studentInformation)
+                    self.setupTableViewData(with: studentInformation)
+                }
             }
-        }
-    }
-    
-    func getStudentsLocationFailed(withErrorMessage message: String) {
-        DispatchQueue.main.async {
-            self.selectedStudentViewController.dismissLoadingView()
-            self.displayFailureAlert(title: nil, error: message)
         }
     }
 }

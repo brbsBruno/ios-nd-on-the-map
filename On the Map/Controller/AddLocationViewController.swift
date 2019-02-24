@@ -31,8 +31,8 @@ class AddLocationViewController: UIViewController, FailableView, LoadableView {
         if segue.identifier == segueID {
             
             if let controller = segue.destination as? LocationDetailsViewController,
-                let placemark = sender as? CLPlacemark {
-                controller.placemark = placemark
+                let studentInformation = sender as? StudentInformation {
+                controller.studentInformation = studentInformation
             }
         }
     }
@@ -70,14 +70,32 @@ class AddLocationViewController: UIViewController, FailableView, LoadableView {
         geocoder.geocodeAddressString(location) { (placemarks, error) in
             self.dismissLoadingView()
             
-            guard let placemark = placemarks?.first else {
-                let error = NSLocalizedString("No results found in this location", comment: "")
-                self.displayFailureAlert(title: errorTitle, error: error)
-                return
+            guard let placemark = placemarks?.first,
+                let latitude = placemark.location?.coordinate.latitude,
+                let longitude = placemark.location?.coordinate.longitude,
+                let mapString = placemark.name else {
+                    let error = NSLocalizedString("No results found in this location", comment: "")
+                    self.displayFailureAlert(title: errorTitle, error: error)
+                    return
             }
             
+            let firstName: String = UdacityClient.shared().udacityUser!.firstName
+            let lastName :String = UdacityClient.shared().udacityUser!.lastName
+            let uniqueKey = UdacityClient.shared().udacityUser!.key
+            
+            let studentInformation = StudentInformation.init(objectId: nil,
+                                                             longitude: longitude,
+                                                             latitude: latitude,
+                                                             mapString: mapString,
+                                                             firstName: firstName,
+                                                             lastName: lastName,
+                                                             mediaURL: website,
+                                                             uniqueKey: uniqueKey,
+                                                             createdAt: nil,
+                                                             updatedAt: nil)
+            
             let segueID = "showLocationDetails"
-            self.performSegue(withIdentifier: segueID, sender: placemark)
+            self.performSegue(withIdentifier: segueID, sender: studentInformation)
         }
     }
 }

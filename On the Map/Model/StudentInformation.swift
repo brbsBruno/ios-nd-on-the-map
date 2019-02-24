@@ -10,7 +10,7 @@ import Foundation
 
 struct StudentInformation: Codable {
     
-    var objectId: String
+    var objectId: String?
     var longitude: Double?
     var latitude: Double?
     var mapString: String?
@@ -18,15 +18,11 @@ struct StudentInformation: Codable {
     var lastName: String!
     var mediaURL: String!
     var uniqueKey: String?
-    var createdAt: Date
-    var updatedAt: Date
+    var createdAt: Date?
+    var updatedAt: Date?
     
     var fullName: String {
         return [firstName, lastName].compactMap{ $0 }.joined(separator: " ")
     }
-}
-
-struct StudentInformationResults: Codable {
     
-    var results: [StudentInformation]?
 }
