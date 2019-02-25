@@ -15,7 +15,7 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     
-    var theData: [StudentInformation]? {
+    var theData: StudentInformationModel? {
         didSet {
             if (isViewLoaded) {
                 reloadAnnotations()
@@ -41,7 +41,7 @@ class MapViewController: UIViewController {
     
     func setupAnnotations() {
         if let studentInformations = theData {
-            for student in studentInformations {
+            for student in studentInformations.studentInformations {
                 
                 if let latitude = student.latitude, let longitude = student.longitude {
                     let annotation = MKPointAnnotation()

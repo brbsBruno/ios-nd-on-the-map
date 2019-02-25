@@ -31,12 +31,12 @@ class TabBarController: UITabBarController, FailableView {
     
     //MARK: Setup
     
-    func setupMapViewData(with data: [StudentInformation]?) {
+    func setupMapViewData(with data: StudentInformationModel?) {
         let mapViewController = viewControllers?.first as! MapViewController
         mapViewController.theData = data
     }
     
-    func setupTableViewData(with data: [StudentInformation]?) {
+    func setupTableViewData(with data: StudentInformationModel?) {
         let tableViewController = viewControllers?.last as! TableViewController
         tableViewController.theData = data
         if (tableViewController.isViewLoaded) {
@@ -71,9 +71,11 @@ class TabBarController: UITabBarController, FailableView {
                 if let error = error {
                     self.displayFailureAlert(title: nil, error: error.localizedDescription)
                     
-                } else {
-                    self.setupMapViewData(with: studentInformation)
-                    self.setupTableViewData(with: studentInformation)
+                } else if let studentInformation = studentInformation {
+                    let model = StudentInformationModel(studentInformations: studentInformation)
+                    
+                    self.setupMapViewData(with: model)
+                    self.setupTableViewData(with: model)
                 }
             }
         }

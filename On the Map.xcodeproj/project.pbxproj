@@ -26,6 +26,7 @@
 		7F8FDC4822024C6B00732715 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FDC4722024C6B00732715 /* MapViewController.swift */; };
 		7F9ED9D82221E2AA00D4503F /* ParseClientConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9ED9D72221E2AA00D4503F /* ParseClientConvenience.swift */; };
 		7F9ED9DA2222A77600D4503F /* UdacityUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9ED9D92222A77600D4503F /* UdacityUser.swift */; };
+		7FB838522224A80400130BE1 /* StudentInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB838512224A80400130BE1 /* StudentInformationModel.swift */; };
 		7FB86B2120FB884800633AD5 /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB86B2020FB884800633AD5 /* UdacityConstants.swift */; };
 		7FD7BD8820C4B04B00D8F7E7 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD7BD8720C4B04B00D8F7E7 /* UdacityClient.swift */; };
 		7FE441D221F4F34900AE4497 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE441D121F4F34900AE4497 /* TabBarController.swift */; };
@@ -65,6 +66,7 @@
 		7F8FDC4722024C6B00732715 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7F9ED9D72221E2AA00D4503F /* ParseClientConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClientConvenience.swift; sourceTree = "<group>"; };
 		7F9ED9D92222A77600D4503F /* UdacityUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UdacityUser.swift; path = "On the Map/Model/UdacityUser.swift"; sourceTree = SOURCE_ROOT; };
+		7FB838512224A80400130BE1 /* StudentInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationModel.swift; sourceTree = "<group>"; };
 		7FB86B2020FB884800633AD5 /* UdacityConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		7FD7BD8720C4B04B00D8F7E7 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		7FE441D121F4F34900AE4497 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				7F9ED9D92222A77600D4503F /* UdacityUser.swift */,
 				7F6090CB211F187900A432B1 /* UdacitySession.swift */,
 				7F2495C32203BEBD00617668 /* StudentInformation.swift */,
+				7FB838512224A80400130BE1 /* StudentInformationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				7F6616E521036EA5004B7A1A /* UdacityConvenience.swift in Sources */,
 				7F9ED9DA2222A77600D4503F /* UdacityUser.swift in Sources */,
 				7F8FDC4622024BC200732715 /* TableViewController.swift in Sources */,
+				7FB838522224A80400130BE1 /* StudentInformationModel.swift in Sources */,
 				7F8FDC4822024C6B00732715 /* MapViewController.swift in Sources */,
 				7FD7BD8820C4B04B00D8F7E7 /* UdacityClient.swift in Sources */,
 				7F15FB1C221F6F02006BE3BC /* LocationDetailsViewController.swift in Sources */,

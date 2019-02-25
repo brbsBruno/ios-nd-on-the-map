@@ -14,11 +14,11 @@ class TableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var theData: [StudentInformation]? {
+    var theData: StudentInformationModel? {
         didSet {
             if (isViewLoaded) {
-                if (theData != nil) {
-                    theData!.sort {
+                if (theData != nil && theData!.studentInformations.count > 0) {
+                    theData!.studentInformations.sort {
                         guard let updatedAt0 = $0.updatedAt, let updatedAt1 = $1.updatedAt else { return false }
                         return updatedAt0 > updatedAt1
                     }
@@ -51,7 +51,7 @@ extension TableViewController: UITableViewDelegate {
 extension TableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return theData?.count ?? 0
+        return theData?.studentInformations.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,15 +65,15 @@ extension TableViewController: UITableViewDataSource {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: identifier)
         }
         
-        cell.textLabel?.text = theData?[indexPath.row].fullName
-        cell.detailTextLabel?.text = theData?[indexPath.row].mediaURL
+        cell.textLabel?.text = theData?.studentInformations[indexPath.row].fullName
+        cell.detailTextLabel?.text = theData?.studentInformations[indexPath.row].mediaURL
         cell.imageView?.image = UIImage(named: "icon_pin")
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let mediaURL = URL(string: theData?[indexPath.row].mediaURL ?? ""), UIApplication.shared.canOpenURL(mediaURL) {
+        if let mediaURL = URL(string: theData?.studentInformations[indexPath.row].mediaURL ?? ""), UIApplication.shared.canOpenURL(mediaURL) {
             UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
             
         } else {
