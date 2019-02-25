@@ -13,7 +13,10 @@ extension ParseClient {
     // MARK: (GET) StudentLocation
     
     func getStudentLocation(completion: @escaping (_ success: [StudentInformation]?, _ error: NSError?) -> Void) {
-        let studentURL = baseURL(method: Methods.StudentLocation, parameters: nil)
+        
+        var defaultParameters = ["order" : "-updatedAt", "limit" : 100] as [String : AnyObject]
+        
+        let studentURL = baseURL(method: Methods.StudentLocation, parameters: defaultParameters)
         
         var request = URLRequest(url: studentURL)
         request.httpMethod = "GET"
